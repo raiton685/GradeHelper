@@ -114,11 +114,11 @@ public class GradeHelper {
 
     public void gradeResult() {
         if (average <= 3) {
-            System.out.println("Итоговоя оценка: " + average + "\n" + "Необходимо улучшить результат.");
+            System.out.println("Итоговая оценка: " + average + "\n" + "Необходимо улучшить результат.");
         } else if (average == 4) {
-            System.out.println("Итоговоя оценка: " + average + "\n" + "Хороший результат.");
+            System.out.println("Итоговая оценка: " + average + "\n" + "Хороший результат.");
         } else {
-            System.out.println("Итоговоя оценка: " + average + "\n" + "Отличный результат.");
+            System.out.println("Итоговая оценка: " + average + "\n" + "Отличный результат.");
         }
 
     }
