@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class GradeHelper {
     Scanner in = new Scanner(System.in);
     int[] gradesArray;
-    int average;
+    double average;
     int numberOfGrades;
 
 
@@ -87,10 +87,10 @@ public class GradeHelper {
                 five++;
             }
         }
-        int result = (one + 2 * two + 3 * three + 4 * four + 5 * five) / (one + two + three + four + five);
+        double result = (double) (one + 2 * two + 3 * three + 4 * four + 5 * five) / (one + two + three + four + five);
         average = result;
-        System.out.println("\n" + "Средняя оценка по предмету: " + result + "\n" +
-                "Количество пятерок: " + five + "\n" +
+        System.out.printf("\n" + "Средняя оценка по предмету: %.1f", result);
+        System.out.println("\n" + "Количество пятерок: " + five + "\n" +
                 "Количество оценок ниже тройки: " + (one + two));
 
         System.out.println();
@@ -113,12 +113,18 @@ public class GradeHelper {
     }
 
     public void gradeResult() {
-        if (average <= 3) {
-            System.out.println("Итоговая оценка: " + average + "\n" + "Необходимо улучшить результат.");
-        } else if (average == 4) {
-            System.out.println("Итоговая оценка: " + average + "\n" + "Хороший результат.");
+        if (average < 2.54) {
+            average = 2;
+            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Необходимо улучшить результат.");
+        } else if (average >= 2.55 && average <= 3.54) {
+            average = 3;
+            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Необходимо улучшить результат.");
+        } else if (average >= 3.55 && average <= 4.54) {
+            average = 4;
+            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Хороший результат.");
         } else {
-            System.out.println("Итоговая оценка: " + average + "\n" + "Отличный результат.");
+            average = 5;
+            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Отличный результат.");
         }
 
     }
