@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class GradeHelper {
     Scanner in = new Scanner(System.in);
+    int grade;
     int[] gradesArray;
     double average;
-    int numberOfGrades;
+    int number;
+    int one = 0, two = 0, three = 0, four = 0, five = 0;
 
 
     public void inputInfo() {
@@ -24,36 +26,27 @@ public class GradeHelper {
             }
         }
         System.out.println();
-        while (true) {
-            System.out.print("Выберите предмет: информатика, история, математика: ");
-            String subject = in.next();
-            if (subject.equalsIgnoreCase("Информатика") ||
-                    subject.equalsIgnoreCase("История") ||
-                    subject.equalsIgnoreCase("Математика")) {
-                System.out.println("Предмет: " + subject + ".");
-                break;
-            } else {
-                System.out.println("Введено неверное значение!");
-            }
-        }
+
+        System.out.print("Введите название предмета: ");
+        String subject = in.next();
+        System.out.println("Предмет: " + subject + ".");
         System.out.println();
     }
 
     public int quantityGrades() {
         while (true) {
             System.out.print("Введите количество оценок от 5 до 15: ");
-            numberOfGrades = in.nextInt();
-            if (numberOfGrades >= 5 && numberOfGrades <= 15) {
+            number = in.nextInt();
+            if (number >= 5 && number <= 15) {
                 break;
             } else {
                 System.out.println("Введено неверное значение!");
             }
         }
-        return numberOfGrades;
+        return number;
     }
 
     public void getGrades() {
-        gradesArray = new int[numberOfGrades];
         System.out.println("Введите оценки от 1 до 5: ");
         for (int i = 0; i < gradesArray.length; i++) {
             while (true) {
@@ -65,6 +58,11 @@ public class GradeHelper {
                 }
             }
         }
+        in.close();
+    }
+
+
+    public void showGrades() {
         System.out.print("Оценки по предмету: ");
         for (int j : gradesArray) {
             System.out.print(j + " ");
@@ -72,8 +70,7 @@ public class GradeHelper {
         System.out.println();
     }
 
-    public void averageGrade() {
-        int one = 0, two = 0, three = 0, four = 0, five = 0;
+    public double averageGrade() {
         for (int j : gradesArray) {
             if (j == 1) {
                 one++;
@@ -87,13 +84,16 @@ public class GradeHelper {
                 five++;
             }
         }
-        double result = (double) (one + 2 * two + 3 * three + 4 * four + 5 * five) / (one + two + three + four + five);
-        average = result;
-        System.out.printf("\n" + "Средняя оценка по предмету: %.1f", result);
+        return average = (double) (one + 2 * two + 3 * three + 4 * four + 5 * five) /
+                (one + two + three + four + five);
+    }
+
+    public void showAverage() {
+        System.out.printf("\n" + "Средняя оценка по предмету: %.1f", average);
         System.out.println("\n" + "Количество пятерок: " + five + "\n" +
                 "Количество оценок ниже тройки: " + (one + two));
-
         System.out.println();
+
     }
 
     public void minMaxGrade() {
@@ -112,31 +112,42 @@ public class GradeHelper {
         System.out.println();
     }
 
-    public void gradeResult() {
+    public int finalGrade() {
         if (average < 2.54) {
-            average = 2;
-            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Необходимо улучшить результат.");
+            return grade = 2;
         } else if (average >= 2.55 && average <= 3.54) {
-            average = 3;
-            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Необходимо улучшить результат.");
+            return grade = 3;
         } else if (average >= 3.55 && average <= 4.54) {
-            average = 4;
-            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Хороший результат.");
+            return grade = 4;
         } else {
-            average = 5;
-            System.out.println("Итоговая оценка: " + (int) average + "\n" + "Отличный результат.");
+            return grade = 5;
+        }
+    }
+
+    public void showResult() {
+        if (grade == 2) {
+            System.out.println("Итоговая оценка: " + grade + "\n" + "Необходимо улучшить результат.");
+        } else if (grade == 3) {
+            System.out.println("Итоговая оценка: " + grade + "\n" + "Необходимо улучшить результат.");
+        } else if (grade == 4) {
+            System.out.println("Итоговая оценка: " + grade + "\n" + "Хороший результат.");
+        } else {
+            System.out.println("Итоговая оценка: " + grade + "\n" + "Отличный результат.");
         }
 
     }
 
+
     public static void main(String[] args) {
         GradeHelper program = new GradeHelper();
         program.inputInfo();
-        program.quantityGrades();
+        program.gradesArray = new int[program.quantityGrades()];
         program.getGrades();
-        program.averageGrade();
+        program.showGrades();
+        program.average = program.averageGrade();
         program.minMaxGrade();
-        program.gradeResult();
-
+        program.showAverage();
+        program.grade = program.finalGrade();
+        program.showResult();
     }
 }
