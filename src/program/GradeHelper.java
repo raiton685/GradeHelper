@@ -4,11 +4,9 @@ import java.util.Scanner;
 
 public class GradeHelper {
     Scanner in = new Scanner(System.in);
-    int grade;
     int[] gradesArray;
-    double average;
     int number;
-    int one = 0, two = 0, three = 0, four = 0, five = 0;
+    int one, two, three, four, five;
 
 
     public void inputInfo() {
@@ -84,11 +82,12 @@ public class GradeHelper {
                 five++;
             }
         }
-        return average = (double) (one + 2 * two + 3 * three + 4 * four + 5 * five) /
+        return (double) (one + 2 * two + 3 * three + 4 * four + 5 * five) /
                 (one + two + three + four + five);
     }
 
     public void showAverage() {
+        double average = averageGrade();
         System.out.printf("\n" + "Средняя оценка по предмету: %.1f", average);
         System.out.println("\n" + "Количество пятерок: " + five + "\n" +
                 "Количество оценок ниже тройки: " + (one + two));
@@ -113,18 +112,20 @@ public class GradeHelper {
     }
 
     public int finalGrade() {
+        double average = averageGrade();
         if (average < 2.54) {
-            return grade = 2;
+            return 2;
         } else if (average >= 2.55 && average <= 3.54) {
-            return grade = 3;
+            return 3;
         } else if (average >= 3.55 && average <= 4.54) {
-            return grade = 4;
+            return 4;
         } else {
-            return grade = 5;
+            return 5;
         }
     }
 
     public void showResult() {
+        int grade = finalGrade();
         if (grade == 2) {
             System.out.println("Итоговая оценка: " + grade + "\n" + "Необходимо улучшить результат.");
         } else if (grade == 3) {
@@ -144,10 +145,8 @@ public class GradeHelper {
         program.gradesArray = new int[program.quantityGrades()];
         program.getGrades();
         program.showGrades();
-        program.average = program.averageGrade();
         program.minMaxGrade();
         program.showAverage();
-        program.grade = program.finalGrade();
         program.showResult();
     }
 }
